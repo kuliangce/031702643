@@ -47,7 +47,7 @@ void Level_seven(wstring y, wchar_t s1[], wchar_t s2[], wchar_t s3[], int start)
 		}
 	}
 	for (int i = start; i < ed; i++) {
-		if (y[i] == L'路' || y[i] == L'道' || y[i] == L'巷' || y[i] == L'里' || y[i] == L'街') {
+		if (y[i] == L'路' || y[i] == L'道' || y[i] == L'巷'/* || y[i] == L'里'*/ || y[i] == L'街') {
 			for (int j = start; j <= i; j++) {
 				s1[j - start] = y[j];
 			}
