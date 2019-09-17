@@ -31,7 +31,7 @@ int KMP_count(wchar_t x[], int m, wstring y, int n, int next[]) {
 	return 0;
 }
 void Level_five(wstring y, wchar_t s[], int start) {
-	int len = y.length();
+	int len = (int)y.length();
 	for (int i = start, j = 0; i < len; i++, j++) {
 		if (y[i] == 0)
 			break;
@@ -39,7 +39,7 @@ void Level_five(wstring y, wchar_t s[], int start) {
 	}
 }
 void Level_seven(wstring y, wchar_t s1[], wchar_t s2[], wchar_t s3[], int start) {
-	int ed, len = y.length(), mark = start;
+	int ed, len = (int)y.length(), mark = start;
 	for (int i = start; i < len; i++) {
 		if (y[i] == 0) {
 			ed = i;
@@ -71,7 +71,7 @@ void Level_seven(wstring y, wchar_t s1[], wchar_t s2[], wchar_t s3[], int start)
 	}
 }
 void name_and_phonenumber(wstring & text, wchar_t name[], wchar_t phone[]) {
-	int len = text.length(), cnt;
+	int len = (int)text.length(), cnt;
 	text[len - 1] = 0;
 	for (int i = 0; i < len - 2; i++) {
 		text[i] = text[i + 2];
@@ -97,13 +97,15 @@ void name_and_phonenumber(wstring & text, wchar_t name[], wchar_t phone[]) {
 			bool flag = 1;
 			for (int j = 0; j < 11; j++) {
 				cha = text[i + j];
-				phone[j] = text[i + j];
 				if (cha < 48 || cha > 57) {
 					flag = 0;
 					break;
 				}
 			}
 			if (flag) {
+				for (int j = 0; j < 11; j++) {
+					phone[j] = text[i + j];
+				}
 				for (int j = 0; i + j < len; j++) {
 					if (i + j + 11 < len) {
 						text[i + j] = text[i + j + 11];
