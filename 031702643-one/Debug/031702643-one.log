@@ -1,8 +1,6 @@
-﻿  division.cpp
-  main.cpp
-  pretreatment.cpp
+﻿  main.cpp
   print.cpp
   正在生成代码...
 LINK : warning LNK4075: 忽略“/INCREMENTAL”(由于“/PROFILE”规范)
 division.obj : warning LNK4075: 忽略“/EDITANDCONTINUE”(由于“/OPT:REF”规范)
-  031702643-one.vcxproj -> C:\Users\92580\source\repos\031702643-one\Debug\031702643-one.exe
+  031702643-one.vcxproj -> C:\Users\92580\Documents\GitHub\031702643\Debug\031702643-one.exe

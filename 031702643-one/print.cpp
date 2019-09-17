@@ -1,7 +1,7 @@
 #include"print.h"
 int print_four(int id, Addr addr[], wchar_t s[], int level, wchar_t suf[][20]) {
 	for (int i = 0; i < 50; i++)s[i] = 0;
-	int len = wcsnlen_s(addr[id].name, 50), t;
+	int len = (int)wcsnlen_s(addr[id].name, 50), t;
 	for (int i = 0; i < len; i++) {
 		s[i] = addr[id].name[i];
 	}

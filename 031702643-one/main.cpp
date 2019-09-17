@@ -14,8 +14,8 @@ int find_next_level(int now) {
 	for (int i = head[now]; i != 0; i = edge[i].next) {
 		memset(nex, 0, sizeof nex);
 		int son = edge[i].to;
-		int n = text.length();
-		int m = wcsnlen_s(addr[son].name, 50);
+		int n = (int)text.length();
+		int m = (int)wcsnlen_s(addr[son].name, 50);
 		int flag = KMP_count(addr[son].name, m, text, n, nex);
 		l = max(l, flag);
 		if (flag) return son;
@@ -82,5 +82,7 @@ int main(int argv, char** argc) {
 		flag = 1;
 	}
 	fout << L']';
+	fin.close();
+	fout.close();
 	return 0;
 }
