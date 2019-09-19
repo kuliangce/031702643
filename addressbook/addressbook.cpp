@@ -64,8 +64,20 @@ int main(int argv, char** argc) {
 		name_and_phonenumber(text, name, phone);
 		level_one = find_next_level(0, 1);
 		level_two = find_next_level(level_one, 2);
-		level_three = find_next_level(level_two, 3);
-		level_four = find_next_level(level_three, 4);
+		if (level_two)level_three = find_next_level(level_two, 3);
+		else {
+			for (int i = head[level_one]; i != 0; i = edge[i].next) {
+				level_three = find_next_level(edge[i].to, 3);
+				if (level_three)break;
+			}
+		}
+		if (level_three)level_four = find_next_level(level_three, 4);
+		else {
+			for (int i = head[level_two]; i != 0; i = edge[i].next) {
+				level_four = find_next_level(edge[i].to, 4);
+				if (level_four)break;
+			}
+		}
 		fout << L'"' << L"姓名" << L'"' << L":\""<< name << L"\",";
 		fout << L'"' << L"手机" << L'"' << L":\"" << phone << L"\",";
 		fout << L'"' << L"地址" << L'"' << L":[";
