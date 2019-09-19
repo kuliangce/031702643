@@ -10,20 +10,32 @@ char buf[505];
 Edge edge[N];
 Addr addr[N];
 int level_one, level_two, level_three, level_four;
-int find_next_level(int now) {
+int find_next_level(int now, int step) {
+	int r = -1, L = N;
 	for (int i = head[now]; i != 0; i = edge[i].next) {
 		memset(nex, 0, sizeof nex);
 		int son = edge[i].to;
 		int n = (int)text.length();
 		int m = (int)wcsnlen_s(addr[son].name, 50);
 		int flag = KMP_count(addr[son].name, m, text, n, nex);
-		l = max(l, flag);
-		if (flag) return son;
+		if (flag == 0)continue;
+		if (flag == l && step == 4)continue;
+		if (L > flag && flag >= l && L >= l) {
+			L = flag;
+			r = son;
+		}
+		//l = max(l, flag);
+		//if (flag) return son;
+	}
+	if (L != N)l = L;
+	if (r != -1) {
+		return r;
 	}
 	return 0;
 }
 void init() {
-	level_one = level_two = level_three = level_four = l = 0;
+	level_one = level_two = level_three = level_four = 0;
+	l = 0;
 	memset(level_five, 0, sizeof level_five);
 	memset(level_six, 0, sizeof level_six);
 	memset(level_seven, 0, sizeof level_seven);
@@ -50,10 +62,10 @@ int main(int argv, char** argc) {
 		text = Utf82Gbk(buf);
 		uint type = text[0] - 48;
 		name_and_phonenumber(text, name, phone);
-		level_one = find_next_level(0);
-		level_two = find_next_level(level_one);
-		level_three = find_next_level(level_two);
-		level_four = find_next_level(level_three);
+		level_one = find_next_level(0, 1);
+		level_two = find_next_level(level_one, 2);
+		level_three = find_next_level(level_two, 3);
+		level_four = find_next_level(level_three, 4);
 		fout << L'"' << L"姓名" << L'"' << L":\""<< name << L"\",";
 		fout << L'"' << L"手机" << L'"' << L":\"" << phone << L"\",";
 		fout << L'"' << L"地址" << L'"' << L":[";
