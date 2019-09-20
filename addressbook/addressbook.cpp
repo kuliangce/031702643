@@ -63,19 +63,34 @@ int main(int argv, char** argc) {
 		uint type = text[0] - 48;
 		name_and_phonenumber(text, name, phone);
 		level_one = find_next_level(0, 1);
-		level_two = find_next_level(level_one, 2);
+		if (level_one)level_two = find_next_level(level_one, 2);
+		else {
+			for (int i = head[0]; i != 0; i = edge[i].next) {
+				level_two = find_next_level(edge[i].to, 2);
+				if (level_two) {
+					if (type == 3)level_one = edge[i].to;
+					break;
+				}
+			}
+		}
 		if (level_two)level_three = find_next_level(level_two, 3);
 		else {
 			for (int i = head[level_one]; i != 0; i = edge[i].next) {
 				level_three = find_next_level(edge[i].to, 3);
-				if (level_three)break;
+				if (level_three) {
+					if (type == 3)level_two = edge[i].to;
+					break;
+				}
 			}
 		}
 		if (level_three)level_four = find_next_level(level_three, 4);
 		else {
 			for (int i = head[level_two]; i != 0; i = edge[i].next) {
 				level_four = find_next_level(edge[i].to, 4);
-				if (level_four)break;
+				if (level_four) {
+					if (type == 3)level_three = edge[i].to;
+					break;
+				}
 			}
 		}
 		fout << L'"' << L"ÐÕÃû" << L'"' << L":\""<< name << L"\",";
